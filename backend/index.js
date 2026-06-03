@@ -3,6 +3,8 @@ const cors = require('cors');
 const { Pool } = require('pg');
 require('dotenv').config();
 
+const authRoutes = require('./routes/auth');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -26,6 +28,8 @@ app.get('/db-test', async (req, res) => {
     res.status(500).json({ error: 'Database connection failed' });
   }
 });
+
+app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
